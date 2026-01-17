@@ -30,8 +30,11 @@ function App() {
   ]
 
   const [activeTab, setActiveTab] = useState<Tab>('Inbox');
+  const [tasks, setTasks] = useState<Task[]>(mockData);
   const toDoCount = mockData.filter(task => task.status === TaskStatus.TODO).length;
   const doneCount = mockData.filter(task => task.status === TaskStatus.DONE).length;
+  
+
   const createTask = () => {
     return(
       <>
