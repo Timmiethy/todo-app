@@ -5,6 +5,8 @@ import SideBar from './components/layout/SideBar'
 import {TaskStatus, TaskPriority, type Task, Tab} from './types'
 
 import './App.css'  
+import Header from './components/layout/Header'
+import MainContent from './components/layout/MainContent'
 
 function App() {
 
@@ -28,9 +30,10 @@ function App() {
       dueDate: '2026-01-07',
     }
   ]
-
+  
   const [activeTab, setActiveTab] = useState<Tab>('Inbox');
   const [tasks, setTasks] = useState<Task[]>(mockData);
+  const taskCount = mockData.length;
   const toDoCount = mockData.filter(task => task.status === TaskStatus.TODO).length;
   const doneCount = mockData.filter(task => task.status === TaskStatus.DONE).length;
   
@@ -51,6 +54,13 @@ function App() {
       taskDoneCount = {doneCount}
       createTask = {createTask}
       />
+
+      <div className="flex-1 flex flex-col"> 
+        <Header
+        activeTab = {activeTab}/>
+
+        <MainContent taskCount={taskCount} toDoCount={toDoCount} doneCount={doneCount}/>
+      </div>
     </div>
   )
 }

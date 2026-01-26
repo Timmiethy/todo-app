@@ -57,15 +57,20 @@ const navigationItems = [
                     <div
                         key={item.name}
                         onClick={() => setActiveTab(item.name)}
-                        className={`flex items-center justify-between rounded-lg px-2 py-2 hover:bg-slate-100`}
+                        className={`flex items-center justify-between rounded-lg px-2 py-2 cursor-pointer
+                            ${activeTab === item.name ? 'bg-slate-200 text-blue-600 font-medium' : 'hover:bg-slate-100 text-slate-600'} 
+                            transition-all duration-250 group`}
                     >
-                        {/* tab logo and name */}
+                        {/* tab logo and name */}  
                         <div className="flex gap-3 items-center">
-                            <item.icon className="text-slate-500 size-5"/>
-                            <span className="text-sm text-slate-700">{item.name}</span>
+                            <item.icon className={`size-5 
+                                ${activeTab === item.name ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'}`}/>
+                            <span className="text-sm">{item.name}</span>
                         </div>
                         {/* count */}
-                        {item.count > 0 && <span className="flex w-6 h-6 text-xs items-center justify-center text-slate-600 bg-slate-200 rounded-full transition-colors duration-200">{item.count}</span>}
+                        {item.count > 0 && <span className="flex w-6 h-6 text-xs items-center 
+                        justify-center text-slate-600 bg-slate-200 rounded-full transition-colors 
+                        duration-200">{item.count}</span>}
                     </div>
                 ))}
             </nav>
