@@ -33,12 +33,30 @@ function App() {
   
   const [activeTab, setActiveTab] = useState<Tab>('Inbox');
   const [tasks, setTasks] = useState<Task[]>(mockData);
-  const taskCount = mockData.length;
-  const toDoCount = mockData.filter(task => task.status === TaskStatus.TODO).length;
-  const doneCount = mockData.filter(task => task.status === TaskStatus.DONE).length;
+  const taskCount = tasks.length;
+  const toDoCount = tasks.filter(task => task.status === TaskStatus.TODO).length;
+  const doneCount = tasks.filter(task => task.status === TaskStatus.DONE).length;
   
 
   const createTask = () => {
+    return(
+      <>
+      </>
+    )
+  }
+  const toggleStatus = (targetTask: Task) => {
+    setTasks(currentTasks => currentTasks.map(task => {
+      if(task.id === targetTask.id) {
+        return {
+          ...task,
+          status: (task.status === TaskStatus.DONE ? TaskStatus.TODO : TaskStatus.DONE)
+        };
+      }
+      return task;
+    })
+    );
+  }
+  const deleteTask = () => {
     return(
       <>
       </>
@@ -59,7 +77,9 @@ function App() {
         <Header
         activeTab = {activeTab}/>
 
-        <MainContent taskCount={taskCount} toDoCount={toDoCount} doneCount={doneCount}/>
+        <MainContent taskCount={taskCount} toDoCount={toDoCount} 
+        doneCount={doneCount} tasks={tasks} toggleStatus={toggleStatus}
+        deleteTask={deleteTask}/>
       </div>
     </div>
   )

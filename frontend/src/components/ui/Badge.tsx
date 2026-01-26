@@ -1,11 +1,11 @@
 interface BadgeProps {
-    children: React.ReactNode;
+    name: string;
     color: string;
 }
 
-const Badge = ({children, color} : BadgeProps) => (
-    <span className={`px-2 py-0.5 rounded text-xs font-medium ${color}`}>
-        {children}
+const Badge = ({name, color} : BadgeProps) => (
+    <span className={`flex items-center rounded-md text-xs px-2 py-0.5 font-medium ${color}`}>
+        {name}
     </span>
 )
 

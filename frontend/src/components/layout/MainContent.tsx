@@ -1,13 +1,18 @@
 import {ClipboardList, Clock, CheckCircle2} from 'lucide-react'
 import StatsCard from '../ui/StatsCard'
+import { type Task } from '../../types'
+import TaskCard from '../tasks/TaskCard'
 
 interface MainContentProps {
     taskCount: number,
     toDoCount: number,
-    doneCount: number
+    doneCount: number,
+    tasks: Task[],
+    toggleStatus: (task: Task) => void,
+    deleteTask: () => void
 }
 
-const MainContent = ({taskCount, toDoCount, doneCount} : MainContentProps) => {
+const MainContent = ({taskCount, toDoCount, doneCount, tasks, toggleStatus, deleteTask} : MainContentProps) => {
     const statsItem = [
         {
             name: 'Total Tasks',
@@ -35,7 +40,7 @@ const MainContent = ({taskCount, toDoCount, doneCount} : MainContentProps) => {
         // container
         <div className="p-8 min-h-screen">
             {/* stats grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 {statsItem.map(item => (
                     <div key={item.name}>
                     <StatsCard name={item.name}
@@ -47,7 +52,15 @@ const MainContent = ({taskCount, toDoCount, doneCount} : MainContentProps) => {
                     ))
                 }
             </div>
-            
+
+            {/* task card test */}
+            <div className="flex flex-col gap-3">
+                {tasks.map(task => (
+                    <div key={task.title}>
+                    <TaskCard task={task} toggleStatus={toggleStatus} deleteTask={deleteTask}/>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

@@ -68,7 +68,7 @@ const navigationItems = [
                             <span className="text-sm">{item.name}</span>
                         </div>
                         {/* count */}
-                        {item.count > 0 && <span className="flex w-6 h-6 text-xs items-center 
+                        {item.count > 0 && <span className="flex w-5 h-5 text-xs items-center 
                         justify-center text-slate-600 bg-slate-200 rounded-full transition-colors 
                         duration-200">{item.count}</span>}
                     </div>

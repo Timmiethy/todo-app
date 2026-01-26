@@ -20,6 +20,14 @@ export const Tab = {
 } as const;
 export type Tab = typeof Tab[keyof typeof Tab];
 
+export const ListTab = {
+    All: 'All',
+    ToDo: 'To Do',
+    Working: 'Working',
+    Done: 'Done'
+} as const;
+export type ListTab = typeof ListTab[keyof typeof ListTab]
+
 export interface Task {
     id: string;
     title: string;
