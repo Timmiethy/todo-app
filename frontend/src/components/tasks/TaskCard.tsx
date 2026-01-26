@@ -8,7 +8,7 @@ import StatusBadge from '../ui/StatusBadge'
 interface TaskCardProps {
     task: Task,
     toggleStatus: (task: Task) => void,
-    deleteTask: () => void
+    deleteTask: (task: Task) => void
 }
 
 const TaskCard = ({task, toggleStatus, deleteTask} : TaskCardProps) => {
@@ -52,7 +52,7 @@ const TaskCard = ({task, toggleStatus, deleteTask} : TaskCardProps) => {
 
             {/* delete button */}
             <button
-                onClick={() => {deleteTask}}
+                onClick={() => deleteTask(task)}
                 className='text-white group-hover:text-slate-300 p-2 hover:bg-red-50 hover:text-red-500
                 rounded-lg'>
                 <Trash2 size={18}/>

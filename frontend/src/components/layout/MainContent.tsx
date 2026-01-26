@@ -9,7 +9,7 @@ interface MainContentProps {
     doneCount: number,
     tasks: Task[],
     toggleStatus: (task: Task) => void,
-    deleteTask: () => void
+    deleteTask: (task: Task) => void
 }
 
 const MainContent = ({taskCount, toDoCount, doneCount, tasks, toggleStatus, deleteTask} : MainContentProps) => {
@@ -56,7 +56,7 @@ const MainContent = ({taskCount, toDoCount, doneCount, tasks, toggleStatus, dele
             {/* task card test */}
             <div className="flex flex-col gap-3">
                 {tasks.map(task => (
-                    <div key={task.title}>
+                    <div key={task.id}>
                     <TaskCard task={task} toggleStatus={toggleStatus} deleteTask={deleteTask}/>
                     </div>
                 ))}

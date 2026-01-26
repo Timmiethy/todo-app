@@ -56,10 +56,13 @@ function App() {
     })
     );
   }
-  const deleteTask = () => {
-    return(
-      <>
-      </>
+  const deleteTask = (targetTask: Task) => {
+    setTasks(
+      currentTasks => currentTasks.filter(
+        task => (
+          task.id !== targetTask.id
+        )
+      )
     )
   }
 
