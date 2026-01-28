@@ -37,11 +37,3 @@ export interface Task {
     tags: string[];
     dueDate: string;
 }
-
-export const dateString = new Date().toLocaleDateString(
-    'en-US', {
-        weekday:'long',
-        month:'long',
-        day:'numeric'
-    }
-)

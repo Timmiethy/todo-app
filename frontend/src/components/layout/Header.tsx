@@ -1,10 +1,35 @@
-import {Tab, dateString} from '../../types.ts'
+import {Tab} from '../../types.ts'
 import {Search} from 'lucide-react'
+import {useState, useEffect} from 'react'
 
 interface HeaderProps {
     activeTab : Tab;
 }
 const Header = ({activeTab} : HeaderProps) => {
+    // date state
+    const [date, setDate] = useState(new Date())
+
+    // update date every one minute
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setDate(new Date());
+        }, 60000);
+
+        return () => {
+            clearInterval(timer);
+        }
+    }, [])
+
+    // format date
+    const formattedDate = date.toLocaleDateString(
+        'en-US',
+        {
+            weekday: 'long',
+            month: 'long',
+            day: 'numeric'
+        }
+    )
+
     return (
         <header className="p-6 w-full h-16 flex items-center justify-between border-b border-slate-300 z-10 sticky">
             <div className="flex gap-3 items-center ">
@@ -15,14 +40,16 @@ const Header = ({activeTab} : HeaderProps) => {
                     |
                 </span>
                 <span className="text-slate-500 text-sm">
-                    {dateString}
+                    {formattedDate}
                 </span>
             </div>
-            
+
             {/* search bar */}
             <div className="flex gap-3 ">
 
             </div>
+
+            
             
         </header>
     )
