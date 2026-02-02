@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import SideBar from './components/layout/SideBar'
 import {TaskStatus, TaskPriority, type Task, Tab} from './types'
+import CreateTaskModal from './components/tasks/CreateTaskModal'
 
 import './App.css'  
 import Header from './components/layout/Header'
@@ -28,6 +29,15 @@ function App() {
       priority: TaskPriority.HIGH,
       tags: ['school', 'education'],
       dueDate: '2026-01-07',
+    },
+    {
+      id: '3',
+      title: 'School',
+      description: 'soan report',
+      status: TaskStatus.TODO,
+      priority: TaskPriority.MEDIUM,
+      tags: ['school', 'gpa'],
+      dueDate: '2026-01-07'
     }
   ]
   
@@ -36,15 +46,19 @@ function App() {
   const taskCount = tasks.length;
   const toDoCount = tasks.filter(task => task.status === TaskStatus.TODO).length;
   const doneCount = tasks.filter(task => task.status === TaskStatus.DONE).length;
+  const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState<boolean>(false);
   
-
-  const createTask = () => {
-    return(
-      <>
-      </>
-    )
+  // toggle CreateTaskModal
+  const openCreateTaskModal = () => {
+    setIsCreateTaskModalOpen(true)
+    console.log("CreateTaskModal:", true)
+  };
+  const closeCreateTaskModal = () => {
+    setIsCreateTaskModalOpen(false)
   }
-  const toggleStatus = (targetTask: Task) => {
+
+  // toggle TaskStatus
+  const toggleTaskStatus = (targetTask: Task) => {
     setTasks(currentTasks => currentTasks.map(task => {
       if(task.id === targetTask.id) {
         return {
@@ -56,6 +70,8 @@ function App() {
     })
     );
   }
+
+  // delete Task logic
   const deleteTask = (targetTask: Task) => {
     setTasks(
       currentTasks => currentTasks.filter(
@@ -66,6 +82,34 @@ function App() {
     )
   }
 
+  // submit task logic
+  const handleSubmitNewTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    const maxId = tasks.length > 0 ? 
+      Math.max(...tasks.map(task => parseInt(task.id))) : 0
+    const newTaskId = (maxId + 1).toString();
+
+    const newTask = {
+      id: newTaskId,
+      title: formData.get('title') as string,
+      description: formData.get('description') as string,
+      status: TaskStatus.TODO,
+      priority: formData.get('priority') as TaskPriority,
+      tags: ['General'],
+      dueDate: new Date().toLocaleDateString(
+        'en-US', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long'
+        }
+      )
+    }
+    const newTasks = tasks.concat(newTask);
+    setTasks(newTasks);
+    closeCreateTaskModal;
+  }
   return(
     <div className="min-h-screen flex bg-slate-50">
       <SideBar 
@@ -73,15 +117,19 @@ function App() {
       setActiveTab = {setActiveTab}
       taskCount = {toDoCount}
       taskDoneCount = {doneCount}
-      createTask = {createTask}
+      createTask = {openCreateTaskModal}
       />
-
+      {isCreateTaskModalOpen && 
+       <CreateTaskModal 
+          isOpen={isCreateTaskModalOpen}
+          onClose={closeCreateTaskModal}
+          onSubmit={handleSubmitNewTask} />}
       <div className="flex-1 flex flex-col"> 
         <Header
         activeTab = {activeTab}/>
 
         <MainContent taskCount={taskCount} toDoCount={toDoCount} 
-        doneCount={doneCount} tasks={tasks} toggleStatus={toggleStatus}
+        doneCount={doneCount} tasks={tasks} toggleStatus={toggleTaskStatus}
         deleteTask={deleteTask}/>
       </div>
     </div>
