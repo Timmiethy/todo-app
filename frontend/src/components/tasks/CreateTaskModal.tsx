@@ -75,12 +75,19 @@ const CreateTaskModal = ({isOpen, onClose, onSubmit} : CreateTaskModalProps) => 
                         <label className="block text-sm text-gray-700 font-medium mb-1">
                             Due
                         </label>
-                        <input
-                        name="dueDate"
-                        placeholder="dd/mm/yyyy"
-                        className="border w-full rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500
-                        border-gray-200 shadow-xs outline-none">
-                        </input>
+                        <div className="flex items-center gap-2">
+                            <input
+                            name="date"
+                            placeholder="Date(1-31)"
+                            className="border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500
+                            border-gray-200 shadow-xs outline-none">
+                            </input>
+                            <select
+                            name="month"
+                            className="flex px-3 py-2 border rounded-lg border-gray-200">
+                                <option value="January">January</option>
+                            </select>
+                        </div>
                     </div>
 
                     {/* cancel and create task buttons */}
