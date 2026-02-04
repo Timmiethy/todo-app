@@ -70,6 +70,19 @@ const CreateTaskModal = ({isOpen, onClose, onSubmit} : CreateTaskModalProps) => 
                         </select>
                     </div>
 
+                    {/* due date */}
+                    <div>
+                        <label className="block text-sm text-gray-700 font-medium mb-1">
+                            Due
+                        </label>
+                        <input
+                        name="dueDate"
+                        placeholder="dd/mm/yyyy"
+                        className="border w-full rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500
+                        border-gray-200 shadow-xs outline-none">
+                        </input>
+                    </div>
+
                     {/* cancel and create task buttons */}
                     <div className="mt-4 flex items-center justify-end gap-3">
                         <button

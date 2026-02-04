@@ -19,7 +19,7 @@ function App() {
       status: TaskStatus.TODO,
       priority: TaskPriority.HIGH,
       tags: ['work', 'income'],
-      dueDate: '2026-01-10',
+      dueDate: '10/01/2026',
     },
     {
       id: '2',
@@ -28,7 +28,7 @@ function App() {
       status: TaskStatus.TODO,
       priority: TaskPriority.HIGH,
       tags: ['school', 'education'],
-      dueDate: '2026-01-07',
+      dueDate: '07/01/2026',
     },
     {
       id: '3',
@@ -37,7 +37,7 @@ function App() {
       status: TaskStatus.TODO,
       priority: TaskPriority.MEDIUM,
       tags: ['school', 'gpa'],
-      dueDate: '2026-01-07'
+      dueDate: '09/01/2026'
     }
   ]
   
@@ -98,18 +98,13 @@ function App() {
       status: TaskStatus.TODO,
       priority: formData.get('priority') as TaskPriority,
       tags: ['General'],
-      dueDate: new Date().toLocaleDateString(
-        'en-US', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long'
-        }
-      )
+      dueDate: formData.get('dueDate') as string || new Date().toLocaleDateString()
     }
     const newTasks = tasks.concat(newTask);
     setTasks(newTasks);
-    closeCreateTaskModal;
+    closeCreateTaskModal();
   }
+
   return(
     <div className="min-h-screen flex bg-slate-50">
       <SideBar 
