@@ -17,8 +17,8 @@ const PriorityIcon = ({ priority } : PriorityIconProps) => {
             )
         case TaskPriority.MEDIUM:
             return (
-                <div className="flex items-center text-orange-600 gap-1">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                <div className="flex items-center text-yellow-500 gap-1">
+                    <span className="w-2 h-2 rounded-full bg-yellow-500" />
                     <span className="text-xs font-semibold">
                         Medium
                     </span>
