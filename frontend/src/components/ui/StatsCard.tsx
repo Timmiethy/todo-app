@@ -11,7 +11,7 @@ interface StatsCardProps {
 const StatsCard = ({name, count, Icon, bgColor, textColor} : StatsCardProps) => {
     return (
         <div 
-        className="rounded-xl border border-slate-200 shadow-sm p-5 flex items-center justify-between">
+        className={`rounded-xl border border-slate-200 shadow-sm p-5 flex items-center justify-between`}>
             <div>
                 <p className="text-slate-500 text-sm">{name}</p>
                 <p className="text-2xl text-black font-bold">{count}</p>

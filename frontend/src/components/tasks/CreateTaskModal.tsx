@@ -8,6 +8,7 @@ interface CreateTaskModalProps {
 }
 
 const CreateTaskModal = ({isOpen, onClose, onSubmit} : CreateTaskModalProps) => {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     return(
         <div className="fixed inset-0 flex items-center justify-center bg-black/50
         backdrop-blur-sm z-50">
@@ -75,12 +76,16 @@ const CreateTaskModal = ({isOpen, onClose, onSubmit} : CreateTaskModalProps) => 
                         <label className="block text-sm text-gray-700 font-medium mb-1">
                             Due
                         </label>
-                        <input
-                        name="dueDate"
-                        placeholder="dd/mm/yyyy"
-                        className="border w-full rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500
-                        border-gray-200 shadow-xs outline-none">
-                        </input>
+                        <div className="flex items-center gap-2">
+                            {/* date */}
+                            <input
+                            name="date"
+                            type="date"
+                            placeholder="Date(1-31)"
+                            className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500
+                            border-gray-200 shadow-xs outline-none">
+                            </input>
+                        </div>
                     </div>
 
                     {/* cancel and create task buttons */}

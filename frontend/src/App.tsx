@@ -40,12 +40,17 @@ function App() {
       dueDate: '09/01/2026'
     }
   ]
+
+  // get today date
+  const today = new Date().toISOString().split('T')[0];
   
   const [activeTab, setActiveTab] = useState<Tab>('Inbox');
   const [tasks, setTasks] = useState<Task[]>(mockData);
   const taskCount = tasks.length;
   const toDoCount = tasks.filter(task => task.status === TaskStatus.TODO).length;
   const doneCount = tasks.filter(task => task.status === TaskStatus.DONE).length;
+  const todayCount = tasks.filter(task => task.dueDate === today).length;
+  const priorityCount = tasks.filter(task => task.priority === TaskPriority.HIGH).length;
   const [isCreateTaskModalOpen, setIsCreateTaskModalOpen] = useState<boolean>(false);
   
   // toggle CreateTaskModal
@@ -91,6 +96,7 @@ function App() {
       Math.max(...tasks.map(task => parseInt(task.id))) : 0
     const newTaskId = (maxId + 1).toString();
 
+    // newTask object
     const newTask = {
       id: newTaskId,
       title: formData.get('title') as string,
@@ -98,7 +104,7 @@ function App() {
       status: TaskStatus.TODO,
       priority: formData.get('priority') as TaskPriority,
       tags: ['General'],
-      dueDate: formData.get('dueDate') as string || new Date().toLocaleDateString()
+      dueDate: formData.get('date') as string
     }
     const newTasks = tasks.concat(newTask);
     setTasks(newTasks);
@@ -113,19 +119,23 @@ function App() {
       taskCount = {toDoCount}
       taskDoneCount = {doneCount}
       createTask = {openCreateTaskModal}
+      todayCount = {todayCount}
+      priorityCount = {priorityCount}
       />
+
       {isCreateTaskModalOpen && 
        <CreateTaskModal 
           isOpen={isCreateTaskModalOpen}
           onClose={closeCreateTaskModal}
           onSubmit={handleSubmitNewTask} />}
+
       <div className="flex-1 flex flex-col"> 
         <Header
         activeTab = {activeTab}/>
 
         <MainContent taskCount={taskCount} toDoCount={toDoCount} 
         doneCount={doneCount} tasks={tasks} toggleStatus={toggleTaskStatus}
-        deleteTask={deleteTask}/>
+        deleteTask={deleteTask} activeTab={activeTab} updateTasks={() => setTasks} today={today}/>
       </div>
     </div>
   )

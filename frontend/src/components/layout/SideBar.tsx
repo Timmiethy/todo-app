@@ -6,6 +6,8 @@ export interface SideBarProps{
     setActiveTab: (tab: Tab) => void;
     taskCount: number;
     taskDoneCount: number;
+    todayCount: number;
+    priorityCount: number;
     createTask: () => void;
 }
 
@@ -14,13 +16,15 @@ export default function SideBar({
     setActiveTab,
     taskCount,
     taskDoneCount,
-    createTask
+    createTask,
+    todayCount,
+    priorityCount
 } : SideBarProps){
 
 const navigationItems = [
     { name: 'Inbox', icon: Inbox, count: taskCount},
-    { name: 'Today', icon: Calendar, count: 2},
-    { name: 'Priority', icon: Star, count: 1},
+    { name: 'Today', icon: Calendar, count: todayCount},
+    { name: 'Priority', icon: Star, count: priorityCount},
     { name: 'Completed', icon: CheckCircle2, count: taskDoneCount}
 ] as const
 
