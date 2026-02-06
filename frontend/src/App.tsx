@@ -151,7 +151,6 @@ function App() {
         toggleStatus={toggleTaskStatus}
         deleteTask={deleteTask} 
         activeTab={activeTab} 
-        updateTasks={() => setTasks} 
         today={today}/>
       </div>
     </div>
