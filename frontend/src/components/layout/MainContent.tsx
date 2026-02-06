@@ -41,6 +41,7 @@ const MainContent = ({taskCount, toDoCount, doneCount, activeTab, tasks, today, 
         }
     ]
 
+    // filter displayed tasks
     let displayedTasks = tasks;
     if (activeTab === 'Today') {
         displayedTasks = tasks.filter(task => task.dueDate === today);
@@ -58,6 +59,7 @@ const MainContent = ({taskCount, toDoCount, doneCount, activeTab, tasks, today, 
         if (!isADone && isBDone) return -1;
         return 0;
     })
+
     return (
         // container
         <div className="p-8 min-h-screen">
