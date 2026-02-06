@@ -11,12 +11,11 @@ interface MainContentProps {
     tasks: Task[],
     activeTab: Tab,
     today: string,
-    updateTasks: (tasks: Task[]) => void,
     toggleStatus: (task: Task) => void,
     deleteTask: (task: Task) => void
 }
 
-const MainContent = ({taskCount, toDoCount, doneCount, activeTab, tasks, today, updateTasks, toggleStatus, deleteTask} : MainContentProps) => {
+const MainContent = ({taskCount, toDoCount, doneCount, activeTab, tasks, today, toggleStatus, deleteTask} : MainContentProps) => {
     const statsItem = [
         {
             name: 'Total Tasks',

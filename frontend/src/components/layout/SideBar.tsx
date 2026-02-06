@@ -1,4 +1,4 @@
-import {Inbox, Calendar, Star, CheckCircle2, Plus, Check} from 'lucide-react'
+import {Inbox, Calendar, Star, CheckCircle2, Plus} from 'lucide-react'
 import {Tab} from '../../types'
 
 export interface SideBarProps{

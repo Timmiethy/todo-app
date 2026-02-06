@@ -1,4 +1,4 @@
-import {CheckCircle2, Trash2, Calendar, Tag} from 'lucide-react'
+import {CheckCircle2, Trash2, Calendar} from 'lucide-react'
 import {type Task} from '../../types'
 import { TaskStatus } from '../../types'
 import PriorityIcon from '../ui/PriorityIcon'

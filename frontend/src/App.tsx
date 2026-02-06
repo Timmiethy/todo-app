@@ -11,6 +11,9 @@ function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Backend API URL from environment variables (Vite prefix required)
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
   // get today date (Local Time YYYY-MM-DD)
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -21,7 +24,7 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:3000/tasks');
+        const response = await fetch(`${API_BASE_URL}/tasks`);
         const data = await response.json();
         setTasks(data);
       } catch (error) {
@@ -31,7 +34,7 @@ function App() {
       }
     };
     fetchTasks();
-  }, []);
+  }, [API_BASE_URL]);
 
   const taskCount = tasks.length;
   const toDoCount = tasks.filter(task => task.status === TaskStatus.TODO).length;
@@ -54,7 +57,7 @@ function App() {
     const newStatus = targetTask.status === TaskStatus.DONE ? TaskStatus.TODO : TaskStatus.DONE;
     
     try {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
@@ -78,7 +81,7 @@ function App() {
   const deleteTask = async (targetTask: Task) => {
     const taskId = targetTask.id || (targetTask as any)._id;
     try {
-      await fetch(`http://localhost:3000/tasks/${taskId}`, {
+      await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
         method: 'DELETE',
       });
       setTasks(currentTasks => currentTasks.filter(task => (task.id || (task as any)._id) !== taskId));
@@ -102,7 +105,7 @@ function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/tasks', {
+      const response = await fetch(`${API_BASE_URL}/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTaskData),

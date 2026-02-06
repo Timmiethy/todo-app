@@ -1,4 +1,4 @@
-import { type Task, TaskPriority } from "../../types";
+import { TaskPriority } from "../../types";
 import { X } from 'lucide-react'
 
 interface CreateTaskModalProps {
@@ -7,8 +7,7 @@ interface CreateTaskModalProps {
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const CreateTaskModal = ({isOpen, onClose, onSubmit} : CreateTaskModalProps) => {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const CreateTaskModal = ({onClose, onSubmit} : CreateTaskModalProps) => {
     return(
         <div className="fixed inset-0 flex items-center justify-center bg-black/50
         backdrop-blur-sm z-50">
